@@ -13,6 +13,8 @@ RUN chown -R www-data:www-data /app
 ENV PORT=8080
 RUN sed -i 's/listen 80 default_server;/listen 8080 default_server;/' /etc/nginx/sites-available/default
 
+ENV CCM_DOCKER_NO_DB=true
+
 # Propojení s Railway MySQL
 ENV CONCRETE_DB_HOST=${MYSQLHOST}
 ENV CONCRETE_DB_USERNAME=${MYSQLUSER}
