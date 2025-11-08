@@ -1,20 +1,19 @@
-# Použij oficiální ConcreteCMS image
-FROM ghcr.io/concrete5-community/docker5:9.4.6-full
+# Použij čistý ConcreteCMS image bez vestavěné DB
+FROM ghcr.io/concrete5-community/docker5:9.4.6
 
-# Nastav pracovní adresář
 WORKDIR /app
 
-# Zkopíruj tvoji aplikaci (tvoje úpravy)
+# Zkopíruj svůj projekt (application/, packages/, themes/…)
 COPY ./app /app
 
-# Nastavení oprávnění
+# Nastavení práv
 RUN chown -R www-data:www-data /app
 
-# Railway používá port 8080 místo 80
+# Railway používá port 8080
 ENV PORT=8080
 RUN sed -i 's/listen 80 default_server;/listen 8080 default_server;/' /etc/nginx/sites-available/default
 
-# Napojení databáze (Railway MySQL)
+# Propojení s Railway MySQL
 ENV CONCRETE_DB_HOST=${MYSQLHOST}
 ENV CONCRETE_DB_USERNAME=${MYSQLUSER}
 ENV CONCRETE_DB_PASSWORD=${MYSQLPASSWORD}
