@@ -5,10 +5,10 @@ return [
     'connections' => [
         'concrete' => [
             'driver' => 'concrete_pdo_mysql',
-            'server' => 'localhost',
-            'database' => 'c5',
-            'username' => 'c5',
-            'password' => '12345',
+            'server' => getenv('MYSQLHOST') ?: 'localhost',
+            'database' => getenv('MYSQLDATABASE') ?: 'c5',
+            'username' => getenv('MYSQLUSER') ?: 'c5',
+            'password' => getenv('MYSQLPASSWORD') ?: '12345',
             'character_set' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
         ],
